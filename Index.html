@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Million-Dollar Offer Stack Quiz</title>
+    <meta name="description" content="Discover the perfect combination of offers to maximize your newsletter revenue. Get personalized recommendations in 3-4 minutes.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    
+    <!-- Intro Screen -->
+    <div id="intro-screen" class="max-w-4xl mx-auto p-6 bg-gradient-to-br from-orange-50 to-red-100 min-h-screen">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">
+                    Build Your Million-Dollar Offer Stack
+                </h1>
+                <p class="text-xl text-gray-600 mb-6">
+                    Discover the perfect combination of offers to maximize your newsletter revenue
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-400">
+                    <h3 class="text-lg font-semibold text-orange-800 mb-3">Why You Need an Offer Stack</h3>
+                    <ul class="text-orange-700 space-y-2">
+                        <li>• Diversifies your income streams</li>
+                        <li>• Serves different customer segments</li>
+                        <li>• Maximizes customer lifetime value</li>
+                        <li>• Creates predictable revenue</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-400">
+                    <h3 class="text-lg font-semibold text-orange-800 mb-3">What You'll Get</h3>
+                    <ul class="text-orange-700 space-y-2">
+                        <li>• Personalized offer recommendations</li>
+                        <li>• Implementation timeline</li>
+                        <li>• Revenue projections</li>
+                        <li>• Priority action steps</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="startQuiz()" class="text-white font-semibold py-4 px-8 rounded-lg text-lg transition duration-200 shadow-lg hover:opacity-90" style="background-color: #ff6719;">
+                    Start Your Offer Stack Quiz
+                </button>
+                <p class="text-gray-500 mt-3">Takes 3-4 minutes • Get instant results</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="hidden max-w-3xl mx-auto p-6 bg-gradient-to-br from-orange-50 to-red-100 min-h-screen">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-sm font-medium text-gray-500">
+                        Question <span id="current-q">1</span> of <span id="total-q">8</span>
+                    </span>
+                    <span class="text-sm font-medium" style="color: #ff6719;"><span id="progress">12</span>% Complete</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div id="progress-bar" class="h-2 rounded-full transition-all duration-300" style="background-color: #ff6719; width: 12%;"></div>
+                </div>
+            </div>
+
+            <h2 id="question-text" class="text-2xl font-bold text-gray-800 mb-8">
+                Loading question...
+            </h2>
+
+            <div id="options-container" class="space-y-4">
+                <!-- Options will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="results-screen" class="hidden max-w-5xl mx-auto p-6 bg-gradient-to-br from-orange-50 to-red-100 min-h-screen">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">
+                    Your Perfect Offer Stack
+                </h1>
+                <div id="result-header" class="rounded-lg p-6 mb-6" style="background-color: #fff4f0; border: 2px solid #ff6719;">
+                    <!-- Result details will be inserted here -->
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Your Recommended Offers</h3>
+                    <div id="offers-list" class="space-y-4">
+                        <!-- Offers will be inserted here -->
+                    </div>
+                </div>
+
+                <div>
+                    <div class="rounded-lg p-6 mb-6" style="background-color: #f0f9f0; border: 2px solid #16a34a;">
+                        <h3 class="text-lg font-bold text-green-800 mb-3">Revenue Potential</h3>
+                        <p id="revenue-potential" class="text-2xl font-bold text-green-700"></p>
+                    </div>
+
+                    <div class="rounded-lg p-6" style="background-color: #fff4f0; border: 2px solid #ff6719;">
+                        <h3 class="text-lg font-bold mb-3" style="color: #ff6719;">Next Steps</h3>
+                        <p id="next-steps" style="color: #cc5214;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rounded-xl p-8 text-white text-center" style="background: linear-gradient(135deg, #ff6719 0%, #e55100 100%);">
+                <h3 class="text-2xl font-bold mb-4">Ready to Build Your Offer Stack?</h3>
+                <p class="text-lg mb-6">
+                    Get detailed implementation guides, templates, and step-by-step strategies in the 9-To-Thrive Newsletter
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://thrivewithcarrie.substack.com/subscribe" target="_blank" rel="noopener noreferrer"
+                       class="bg-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition duration-200 inline-block text-center" style="color: #ff6719;">
+                        Subscribe to The 9-To-Thrive Newsletter
+                    </a>
+                    <button onclick="resetQuiz()" class="border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white transition duration-200" onmouseover="this.style.color='#ff6719'" onmouseout="this.style.color='white'">
+                        Retake Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 0;
+        let answers = {};
+        
+        const questions = [
+            {
+                id: 'audience_size',
+                question: 'What\'s your current newsletter subscriber count?',
+                options: [
+                    { value: 'under_500', label: 'Under 500 subscribers', points: { starter: 3, authority: 0, community: 1, productized: 1, hybrid: 0 } },
+                    { value: '500_2k', label: '500 - 2,000 subscribers', points: { starter: 2, authority: 1, community: 2, productized: 2, hybrid: 1 } },
+                    { value: '2k_10k', label: '2,000 - 10,000 subscribers', points: { starter: 1, authority: 2, community: 3, productized: 2, hybrid: 2 } },
+                    { value: 'over_10k', label: 'Over 10,000 subscribers', points: { starter: 0, authority: 3, community: 2, productized: 3, hybrid: 3 } }
+                ]
+            },
+            {
+                id: 'current_revenue',
+                question: 'What\'s your current monthly revenue from your newsletter/content?',
+                options: [
+                    { value: 'under_500', label: 'Under $500/month', points: { starter: 3, authority: 0, community: 1, productized: 1, hybrid: 0 } },
+                    { value: '500_2k', label: '$500 - $2,000/month', points: { starter: 2, authority: 1, community: 2, productized: 2, hybrid: 1 } },
+                    { value: '2k_10k', label: '$2,000 - $10,000/month', points: { starter: 1, authority: 2, community: 3, productized: 2, hybrid: 2 } },
+                    { value: 'over_10k', label: 'Over $10,000/month', points: { starter: 0, authority: 3, community: 2, productized: 3, hybrid: 3 } }
+                ]
+            },
+            {
+                id: 'time_available',
+                question: 'How much time can you dedicate to creating and managing offers?',
+                options: [
+                    { value: 'limited', label: '1-5 hours per week (I need passive income)', points: { starter: 2, authority: 1, community: 0, productized: 3, hybrid: 1 } },
+                    { value: 'moderate', label: '5-15 hours per week (balanced approach)', points: { starter: 2, authority: 2, community: 2, productized: 2, hybrid: 2 } },
+                    { value: 'substantial', label: '15+ hours per week (I can be hands-on)', points: { starter: 1, authority: 3, community: 3, productized: 1, hybrid: 2 } }
+                ]
+            },
+            {
+                id: 'expertise_level',
+                question: 'How would you describe your expertise in your niche?',
+                options: [
+                    { value: 'developing', label: 'Still developing - I\'m learning and sharing my journey', points: { starter: 3, authority: 0, community: 2, productized: 1, hybrid: 0 } },
+                    { value: 'knowledgeable', label: 'Knowledgeable - I have solid experience to share', points: { starter: 2, authority: 2, community: 2, productized: 2, hybrid: 2 } },
+                    { value: 'expert', label: 'Expert - I\'m recognized as an authority in my field', points: { starter: 0, authority: 3, community: 1, productized: 2, hybrid: 3 } }
+                ]
+            },
+            {
+                id: 'interaction_preference',
+                question: 'What type of interaction do you prefer with your audience?',
+                options: [
+                    { value: 'minimal', label: 'Minimal - I prefer creating content they can consume on their own', points: { starter: 2, authority: 1, community: 0, productized: 3, hybrid: 1 } },
+                    { value: 'moderate', label: 'Moderate - Some interaction through courses and group settings', points: { starter: 2, authority: 2, community: 2, productized: 2, hybrid: 2 } },
+                    { value: 'high', label: 'High - I love building relationships and community', points: { starter: 1, authority: 2, community: 3, productized: 0, hybrid: 2 } }
+                ]
+            },
+            {
+                id: 'income_goals',
+                question: 'What\'s your primary income goal?',
+                options: [
+                    { value: 'replace_income', label: 'Replace my current income ($3-8K/month)', points: { starter: 2, authority: 2, community: 2, productized: 2, hybrid: 1 } },
+                    { value: 'significant_income', label: 'Build significant income ($10-25K/month)', points: { starter: 1, authority: 3, community: 2, productized: 2, hybrid: 3 } },
+                    { value: 'empire', label: 'Create a content empire ($25K+/month)', points: { starter: 0, authority: 2, community: 1, productized: 3, hybrid: 3 } }
+                ]
+            },
+            {
+                id: 'current_offers',
+                question: 'What offers do you currently have (if any)?',
+                options: [
+                    { value: 'none', label: 'No paid offers yet', points: { starter: 3, authority: 0, community: 1, productized: 1, hybrid: 0 } },
+                    { value: 'basic', label: 'Basic offers (lead magnets, low-ticket products)', points: { starter: 2, authority: 1, community: 2, productized: 2, hybrid: 1 } },
+                    { value: 'multiple', label: 'Multiple offers across different price points', points: { starter: 0, authority: 2, community: 2, productized: 2, hybrid: 3 } }
+                ]
+            },
+            {
+                id: 'business_model',
+                question: 'Which business model appeals to you most?',
+                options: [
+                    { value: 'recurring', label: 'Recurring revenue (subscriptions, memberships)', points: { starter: 1, authority: 1, community: 3, productized: 2, hybrid: 2 } },
+                    { value: 'high_ticket', label: 'High-ticket sales (coaching, consulting)', points: { starter: 0, authority: 3, community: 1, productized: 1, hybrid: 2 } },
+                    { value: 'volume', label: 'Volume sales (courses, digital products)', points: { starter: 2, authority: 2, community: 1, productized: 3, hybrid: 2 } },
+                    { value: 'mixed', label: 'Mixed approach across all models', points: { starter: 1, authority: 2, community: 2, productized: 2, hybrid: 3 } }
+                ]
+            }
+        ];
+
+        const offerStacks = {
+            starter: {
+                title: 'The Starter Stack',
+                subtitle: 'Perfect for building your foundation',
+                description: 'You\'re ready to monetize your growing audience with proven, low-risk offers that build trust and generate your first revenue streams.',
+                offers: [
+                    { name: 'Lead Magnet', description: 'Free valuable resource to grow your email list', priority: 'Start Here' },
+                    { name: 'Email Course', description: '5-7 part educational series (Free or $27-47)', priority: 'Month 1' },
+                    { name: 'Digital Template/Tool Vault', description: 'Done-for-you resources ($47-97)', priority: 'Month 2' },
+                    { name: 'Mini-Course or Workshop', description: 'Focused training on one topic ($97-197)', priority: 'Month 3' },
+                    { name: 'Affiliate Links', description: 'Promote relevant tools you use', priority: 'Ongoing' }
+                ],
+                nextSteps: 'Focus on building trust with free value, then introduce low-ticket offers. This approach validates your market before bigger investments.',
+                revenue: '$500-2,000/month within 6 months'
+            },
+            authority: {
+                title: 'The Authority Stack',
+                subtitle: 'Leverage your expertise for premium pricing',
+                description: 'Your expertise deserves premium pricing. This stack positions you as the go-to expert while maximizing your time-to-revenue ratio.',
+                offers: [
+                    { name: 'Signature Masterclass', description: 'High-value training experience ($197-497)', priority: 'Start Here' },
+                    { name: 'High-Ticket Coaching Packages', description: '1-on-1 or small group coaching ($1K-5K)', priority: 'Month 1' },
+                    { name: 'Done-For-You Services', description: 'Premium service offering ($2K-10K)', priority: 'Month 2' },
+                    { name: 'Clarity Calls', description: 'Strategy sessions ($297-497)', priority: 'Ongoing' },
+                    { name: 'Speaking & Workshops', description: 'Live events and corporate training', priority: 'Month 3' }
+                ],
+                nextSteps: 'Lead with your expertise through high-value content, then offer premium solutions. Focus on transformation over information.',
+                revenue: '$5,000-25,000/month within 6 months'
+            },
+            community: {
+                title: 'The Community Stack',
+                subtitle: 'Build relationships that pay dividends',
+                description: 'You excel at building relationships. This stack creates recurring revenue through community and ongoing support.',
+                offers: [
+                    { name: 'Paid Community/Membership', description: 'Monthly access to exclusive content & network ($29-99/month)', priority: 'Start Here' },
+                    { name: 'Group Coaching Program', description: 'Structured group transformation ($297-997/month)', priority: 'Month 1' },
+                    { name: 'Tiered Membership', description: 'Multiple access levels ($29-299/month)', priority: 'Month 2' },
+                    { name: 'Done-With-You Programs', description: 'Guided implementation with support ($497-1997)', priority: 'Month 3' },
+                    { name: 'Community Sponsorships', description: 'Brand partnerships within your community', priority: 'Month 4' }
+                ],
+                nextSteps: 'Start with a simple paid community, then add structured programs. Focus on member success and retention.',
+                revenue: '$3,000-15,000/month recurring within 8 months'
+            },
+            productized: {
+                title: 'The Productized Stack',
+                subtitle: 'Scale with systems and automation',
+                description: 'You want to build once and sell repeatedly. This stack maximizes passive income through scalable digital products.',
+                offers: [
+                    { name: 'Comprehensive Online Course', description: 'Self-paced transformation program ($297-997)', priority: 'Start Here' },
+                    { name: 'AI Tools/GPTs', description: 'Custom AI solutions for your niche ($47-197)', priority: 'Month 1' },
+                    { name: 'Template & Tool Library', description: 'Done-for-you resource vault ($97-297)', priority: 'Month 2' },
+                    { name: 'Web App/SaaS Tool', description: 'Software solution for your audience ($29-99/month)', priority: 'Month 4' },
+                    { name: 'Licensing/White-Label', description: 'Let others sell your products', priority: 'Month 6' }
+                ],
+                nextSteps: 'Create one exceptional course, then build supporting tools and systems. Focus on user experience and results.',
+                revenue: '$8,000-50,000/month within 12 months'
+            },
+            hybrid: {
+                title: 'The Hybrid Stack',
+                subtitle: 'Diversify across all revenue streams',
+                description: 'You\'re ready for a sophisticated approach that combines the best of all worlds for maximum income potential.',
+                offers: [
+                    { name: 'Signature Course + Community', description: 'Course with ongoing support community ($497-1497)', priority: 'Start Here' },
+                    { name: 'Coaching + Done-For-You', description: 'High-touch services ($2K-10K)', priority: 'Month 1' },
+                    { name: 'Multiple Revenue Streams', description: 'Courses, memberships, affiliate, sponsorships', priority: 'Month 2' },
+                    { name: 'Certification Program', description: 'Train others to deliver your method ($1K-5K)', priority: 'Month 4' },
+                    { name: 'Content Empire', description: 'Multiple brands and income sources', priority: 'Month 6' }
+                ],
+                nextSteps: 'Launch your signature offer first, then systematically add complementary revenue streams. Focus on systems and team building.',
+                revenue: '$15,000-100,000+/month within 12 months'
+            }
+        };
+
+        function startQuiz() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            
+            document.getElementById('current-q').textContent = currentQuestion + 1;
+            document.getElementById('total-q').textContent = questions.length;
+            document.getElementById('progress').textContent = Math.round(progress);
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('question-text').textContent = question.question;
+            
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:bg-orange-50 transition duration-200';
+                button.innerHTML = `<span class="font-medium text-gray-800">${option.label}</span>`;
+                button.onclick = () => selectAnswer(question.id, option.value);
+                button.onmouseover = () => button.style.borderColor = '#ff6719';
+                button.onmouseout = () => button.style.borderColor = '#e5e7eb';
+                container.appendChild(button);
+            });
+        }
+
+        function selectAnswer(questionId, answer) {
+            answers[questionId] = answer;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                calculateResult();
+            }
+        }
+
+        function calculateResult() {
+            const scores = { starter: 0, authority: 0, community: 0, productized: 0, hybrid: 0 };
+            
+            Object.entries(answers).forEach(([questionId, answer]) => {
+                const question = questions.find(q => q.id === questionId);
+                const selectedOption = question.options.find(opt => opt.value === answer);
+                
+                if (selectedOption) {
+                    Object.entries(selectedOption.points).forEach(([stack, points]) => {
+                        scores[stack] += points;
+                    });
+                }
+            });
+
+            let topStack = 'starter';
+            let highestScore = scores.starter;
+            
+            Object.entries(scores).forEach(([stack, score]) => {
+                if (score > highestScore) {
+                    highestScore = score;
+                    topStack = stack;
+                }
+            });
+
+            showResult(topStack);
+        }
+
+        function showResult(stackType) {
+            const stack = offerStacks[stackType];
+            
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+            
+            // Fill in result header
+            document.getElementById('result-header').innerHTML = `
+                <h2 class="text-3xl font-bold mb-2" style="color: #ff6719;">${stack.title}</h2>
+                <p class="text-xl mb-4" style="color: #cc5214;">${stack.subtitle}</p>
+                <p class="text-gray-700 text-lg">${stack.description}</p>
+            `;
+            
+            // Fill in offers
+            const offersList = document.getElementById('offers-list');
+            offersList.innerHTML = '';
+            stack.offers.forEach(offer => {
+                const div = document.createElement('div');
+                div.className = 'border rounded-lg p-4 hover:shadow-md transition duration-200';
+                div.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-semibold text-gray-800">${offer.name}</h4>
+                        <span class="text-xs px-2 py-1 rounded text-white" style="background-color: #ff6719;">${offer.priority}</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">${offer.description}</p>
+                `;
+                offersList.appendChild(div);
+            });
+            
+            // Fill in other details
+            document.getElementById('revenue-potential').textContent = stack.revenue;
+            document.getElementById('next-steps').textContent = stack.nextSteps;
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('intro-screen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
